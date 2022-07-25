@@ -1,111 +1,68 @@
 import {
-  addItemToList,
-  addUser,
-  getWeekDays,
-  makeAdminUser,
-  getUserInfo,
+  createUserObject,
+  createCorporateEmailAddress,
+  generateRandomNumberFrom1to10,
 } from "../utils/matchers";
 
 /**
  * Write the assertions using the most appropriate matcher
  */
-describe("05-exercises", () => {
-  test("addItemToList adds a new item to the initial array immutably", () => {
-    expect.assertions(1);
-
-    const prevList = [1, 2, 3, 4];
-    const newItem = 5;
+describe("04-exercises", () => {
+  test("createUserObject returns a user object with the right properties", () => {
+    expect.assertions(3);
 
     /**
-     * Test that the addItemToList function adds the `newItem` variable to the
-     * `prevList` array and returns an array that contains the previous elements
-     * and the new item.
+     * Write 3 assertions that check if executing the createUserObject function
+     * with the following arguments:
      *
-     * The function receives as arguments the previous array and the new item
-     */
-
-    // Write the assertion
-  });
-
-  test("addUser adds a new user to the list of users", () => {
-    expect.assertions(1);
-
-    const users = [{ name: "dani" }, { name: "ana" }, { name: "andrew" }];
-    const expectedUser = { name: "maria" };
-
-    /**
-     * Test that the addUser function returns an array of objects
-     * The function is called with the `users` array as the first argument
-     * and the string "maria" as the second.
+     * "Alex", "Spence", "alex@mail.com"
      *
-     * You need to test that the functions returns an array that contains
-     * an object equal to the one in the `expectedUser` variable
+     * returns an object with the following properties with a truthy value:
+     *
+     * firstName
+     * lastName
+     * email
+     *
+     * @example
+     * expect(obj.prop).toBeTruthy()
      *
      * @tip
-     * you need to use an array matcher that can check objects
+     * you can store the result of executing the function in a variable
+     * to reuse the same function return value in differente assertions
      */
 
-    // Write the assertion
+    // Write the assertions
+    const user = createUserObject("Alex", "Spence", "alex@mail.com");
+
+    expect(user.firstName).toBeTruthy();
+    expect(user.lastName).toBeTruthy();
+    expect(user.email).toBeTruthy();
   });
 
-  test("getWeekDays returns an array of week days", () => {
+  test("createCorporateEmailAddress appends the corporate email domain", () => {
     expect.assertions(1);
 
-    const expectedDays = ["Monday", "Tuesday"];
-
     /**
-     * Write an assertion that executing the getWeekDays function
-     * returns an array of week days.
-     *
-     * You should check that the returned value matches the sub array
-     * in the `expectedDays` variable
+     * Write an assertion using the `.toMatch()` matcher that the result
+     * of executing the createCorporateEmailAddress function with an argument
+     * of "dani" returns a string that includes the rest of the corporate
+     * email address: "@company.com"
      */
 
     // Write the assertion
+    expect(createCorporateEmailAddress("dani")).toMatch(/@company.com/);
   });
 
-  test("makeAdminUser returns an object with the role property", () => {
-    expect.assertions(1);
-
-    const user = { name: "dani" };
-    const expectedProperty = { role: "ADMIN" };
+  test("generateRandomNumberFrom1to10 returns a number between 1 and 10", () => {
+    expect.assertions(2);
 
     /**
-     * Write an assertion that executing the makeAdminUser function
-     * returns an object with a property of role.
-     *
-     * The function receives an object as an argument, therefore you should call it
-     * with the `user` variable as an argument.
-     *
-     * You should check that the returned object sub-matches an object with
-     * the properties of the `expectedProperty` variable
+     * Write 2 assertions to check that the generateRandomNumberFrom1to10 function
+     * returns a number that is greater than 0 and lower than 11
      */
 
-    // Write the assertion
-  });
-
-  test("getUserInfo returns an object without the address properties", () => {
-    expect.assertions(1);
-
-    const userAddress = {
-      postalCode: "08001",
-      city: "Barcelona",
-      streetName: "Sert 1",
-    };
-
-    const user = { name: "dani", ...userAddress };
-
-    /**
-     * Write an assertion that executing the getUserInfo function returns
-     * an object without the properties in the `userAddress` variable
-     *
-     * The function receives an object as an argument, therefore you should call it
-     * with the `user` variable as an argument.
-     *
-     * You should check that the returned object doesn't sub-match an object with
-     * the properties of the `userAddress` variable
-     */
-
-    // Write the assertion
+    // Write the assertions
+    expect(generateRandomNumberFrom1to10()).toBeGreaterThan(0);
+    expect(generateRandomNumberFrom1to10()).toBeLessThan(11);
   });
 });
